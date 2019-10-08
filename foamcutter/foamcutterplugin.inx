@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>Foam cutter machine by Boris</_name>
+    <id>eu.foamcutter.inkscape.cut2d</id>
+    <dependency type="executable" location="extensions">foamcutterplugin.py</dependency>
+    <dependency type="executable" location="extensions">inkex.py</dependency>
+    <dependency type="executable" location="extensions">simplepath.py</dependency>
+    <dependency type="executable" location="extensions">simpletransform.py</dependency>
+    <dependency type="executable" location="extensions">cspsubdiv.py</dependency>
+    <dependency type="executable" location="extensions">cubicsuperpath.py</dependency>
+
+    <param name='active-tab' type="notebook">
+        <page name="setup" _gui-text="Setup">
+            <param name="filename" type="string" _gui-text="Filename">FoamCutter</param>
+            <_param name="help" type="description" xml:space="preserve">The generated g-code file will have .gcode extension. The file is generated in the home directory and increasing numbers are used to prevent overwriting</_param>
+            <param name="dim-x" type="float" min="1.0" max="10000.0" precision="1" _gui-text="Plane X dimension in mm">200</param>
+            <param name="dim-y" type="float" min="1.0" max="10000.0" precision="1" _gui-text="Plane Y dimension in mm">200</param>
+            <param name="speed" type="float" min="-1000.0" max="1000.0" precision="2" _gui-text="Cutting speed in mm/min">100</param>
+            <param name="temperature" type="int" min="1" max="100" precision="0" _gui-text="Wire temperature in percentual">25</param>
+            <param name="flatness" type="float" min="0.001" max="1000.0" precision="3" _gui_text="Flatness (for bezier curves)">1</param>
+        </page>
+        <page name="usage" _gui-text="Usage">
+            <_param name="use1" type="description" xml:space="preserve">Usage:
+
+- Clicking "apply" without any selected path only generates the working area (white rectangle with a cross at [0,0], down left) and prints a help message
+- Clicking "apply" with one selected path generates the gcode on Desktop and prints the name of the generated file
+
+Note: all measures are in mm
+            </_param>
+        </page>
+    </param>
+    <effect>
+    <object-type>all</object-type>
+        <effects-menu>
+            <submenu _name="FoamCutter"/>
+        </effects-menu>
+    </effect>
+    <script>
+        <command reldir="extensions" interpreter="python">foamcutterplugin.py</command>
+    </script>
+</inkscape-extension>
